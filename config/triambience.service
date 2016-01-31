@@ -1,0 +1,9 @@
+[Unit]
+Description=Tristate ambience switcher
+After=user-session.target
+
+[Service]
+ExecStart=/usr/bin/triambience
+
+[Install]
+WantedBy=post-user-session.target
