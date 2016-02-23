@@ -5,6 +5,11 @@
 switcher::switcher(QObject *parent) :
     QObject(parent)
 {
+    if (!QDBusConnection::sessionBus().isConnected())
+    {
+        printf("triambience: Cannot connect to the D-Bus sessionBus\n%s\n", qPrintable(QDBusConnection::sessionBus().lastError().message()));
+    }    
+    
     currentKeypos = QString();
 
     ambience_top = new MGConfItem("/apps/onyxtristate/top");
