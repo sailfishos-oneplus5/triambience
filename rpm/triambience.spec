@@ -46,6 +46,14 @@ systemctl-user disable triambience
 %post
 systemctl-user start triambience
 systemctl-user enable triambience
+mkdir -p /home/nemo/.config/systemd/user/post-user-session.target.wants
+ln -s '/etc/systemd/user/triambience.service' '/home/nemo/.config/systemd/user/post-user-session.target.wants/triambience.service'
+chown -hR 100000:100000 /home/nemo
+chmod 755 /home/nemo/.config/systemd
+chmod 755 /home/nemo/.config/systemd/user
+chmod 755 /home/nemo/.config/systemd/user/post-user-session.target.wants
+chmod 777 /home/nemo/.config/systemd/user/post-user-session.target.wants/triambience.service
+
 
 %pre
 # In case of update, stop first
