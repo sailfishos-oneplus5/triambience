@@ -54,7 +54,10 @@ void switcher::changeAmbience()
     QDBusInterface ambienced("com.jolla.ambienced", "/com/jolla/ambienced", "");
 
     QList<QVariant> args;
-    args.append(QString("file:///usr/share/ambience/%1/%1.ambience").arg(ambiences.value(currentKeypos)));
+    if (ambiences.value(currentKeypos).contains(";"))
+        args.append(QString("file://%1").arg(ambiences.value(currentKeypos).split(";").at(1)));
+    else
+        args.append(QString("file:///usr/share/ambience/%1/%1.ambience").arg(ambiences.value(currentKeypos)));
 
     ambienced.callWithArgumentList(QDBus::AutoDetect, "setAmbience", args);
 }
