@@ -40,10 +40,14 @@ rm -rf %{buildroot}
 %qmake5_install
 
 %preun
-systemctl-user stop triambience
-systemctl-user disable triambience
+# in case of complete removal, stop and disable
+if [ "$1" = "0" ]; then
+  systemctl-user stop triambience
+  systemctl-user disable triambience
+fi
 
 %post
+systemctl-user daemon-reload
 systemctl-user start triambience
 systemctl-user enable triambience
 mkdir -p /home/nemo/.config/systemd/user/post-user-session.target.wants
@@ -59,6 +63,7 @@ chmod 777 /home/nemo/.config/systemd/user/post-user-session.target.wants/triambi
 # In case of update, stop first
 if [ "$1" = "2" ]; then
   systemctl-user stop triambience
+  systemctl-user disable triambience
 fi
 
 %files
