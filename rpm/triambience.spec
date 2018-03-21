@@ -42,20 +42,20 @@ rm -rf %{buildroot}
 %preun
 # in case of complete removal, stop and disable
 if [ "$1" = "0" ]; then
-  systemctl-user stop triambience
-  systemctl-user disable triambience
+  systemctl-user stop triambience || true
+  systemctl-user disable triambience || true
 fi
 
 %post
-systemctl-user daemon-reload
-systemctl-user start triambience
-systemctl-user enable triambience
+systemctl-user daemon-reload || true
+systemctl-user start triambience || true
+systemctl-user enable triambience || true
 
 %pre
 # In case of update, stop first
 if [ "$1" = "2" ]; then
-  systemctl-user stop triambience
-  systemctl-user disable triambience
+  systemctl-user stop triambience || true
+  systemctl-user disable triambience || true
 fi
 
 %files
