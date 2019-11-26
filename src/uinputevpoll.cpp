@@ -115,11 +115,11 @@ void UinputEvPoll::readKeyboard(int fd)
         {
             if (evs[i].type == EV_KEY && evs[i].value == 1)
             {
-                if (evs[i].code == 0x258)
+                if (evs[i].code == 0x259)
                     emit tristateChanged("top");
-                else if (evs[i].code == 0x259)
-                    emit tristateChanged("middle");
                 else if (evs[i].code == 0x25a)
+                    emit tristateChanged("middle");
+                else if (evs[i].code == 0x25b)
                     emit tristateChanged("bottom");
             }
         }

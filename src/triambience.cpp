@@ -31,7 +31,7 @@ int main(int argc, char **argv)
     sw = new switcher();
     uinThread = new QThread();
 
-    int fd = uin->openDevice("/dev/input/event0");
+    int fd = uin->openDevice("/dev/input/event3");
     if (fd == -1)
     {
         printf("triambience: error opening input device\n");
