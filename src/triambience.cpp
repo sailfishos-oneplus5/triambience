@@ -1,18 +1,24 @@
 /*
  * (C) 2016 Kimmo Lindholm <kimmo.lindholm@gmail.com> Kimmoli
+ * (C) 2019 Jami Kettunen <jami.kettunen@protonmail.com>
  *
- * triambience main
+ * Triambience daemon
  *
  */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include <QtCore/QCoreApplication>
+#include <QCoreApplication>
 #include <QObject>
 #include <QThread>
 #include "switcher.h"
 #include "uinputevpoll.h"
+
+
+//
+//  Daemon init
+//
 
 int main(int argc, char **argv)
 {
@@ -21,7 +27,7 @@ int main(int argc, char **argv)
     setlinebuf(stdout);
     setlinebuf(stderr);
 
-    printf("triambience: starting daemon version %s\n", APPVERSION);
+    printf("triambience: Starting daemon version %s\n", APPVERSION);
 
     switcher *sw;
     UinputEvPoll *uin;

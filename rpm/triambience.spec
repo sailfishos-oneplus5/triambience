@@ -1,6 +1,8 @@
 #
-# triambience spec
+# triambience RPM spec
+#
 # (C) kimmoli 2016
+# (C) Jami Kettunen 2019
 #
 
 Name:       triambience
@@ -10,12 +12,12 @@ Name:       triambience
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
-Summary:    Tristate ambience switcher
+Summary:    Tristate ambience switcher daemon
 Version:    0.0.devel
 Release:    1
-Group:      Qt/Qt
+Group:      System/Daemons
 License:    LICENSE
-URL:        https://github.com/kimmoli/triambience
+URL:        https://github.com/sailfishos-oneplus5/triambience
 Source0:    %{name}-%{version}.tar.bz2
 
 BuildRequires:  pkgconfig(Qt5Core)
@@ -23,7 +25,7 @@ BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  pkgconfig(mlite5)
 
 %description
-%{summary}
+Control currently active ambiences using the tristate "notification" slider on your device.
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -62,4 +64,3 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/%{name}
 /etc/systemd/user/
-

@@ -1,12 +1,22 @@
+/*
+ * (C) 2016 Kimmo Lindholm <kimmo.lindholm@gmail.com> Kimmoli
+ * (C) 2019 Jami Kettunen <jami.kettunen@protonmail.com>
+ *
+ * Triambience daemon
+ *
+ */
+
 #ifndef UINPUTEVPOLL_H
 #define UINPUTEVPOLL_H
 
 #include <QObject>
 #include <QMutex>
 
+
 class UinputEvPoll : public QObject
 {
     Q_OBJECT
+
 public:
     explicit UinputEvPoll(QObject *parent = 0);
 
@@ -23,14 +33,13 @@ public slots:
     void doPoll();
 
 private:
-    bool _polling;
-    bool _abort;
-    int _uinputfd;
+    void readKeyboard(int fd);
 
     QMutex mutex;
 
-    void readKeyboard(int fd);
-
+    bool _polling;
+    bool _abort;
+    int _uinputfd;
 };
 
 #endif // UINPUTEVPOLL_H

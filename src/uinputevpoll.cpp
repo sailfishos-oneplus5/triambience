@@ -1,13 +1,21 @@
-#include "uinputevpoll.h"
+/*
+ * (C) 2016 Kimmo Lindholm <kimmo.lindholm@gmail.com> Kimmoli
+ * (C) 2019 Jami Kettunen <jami.kettunen@protonmail.com>
+ *
+ * Triambience daemon
+ *
+ */
+
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/epoll.h>
 #include <unistd.h>
 #include <errno.h>
 #include <linux/input.h>
+#include "uinputevpoll.h"
 
-UinputEvPoll::UinputEvPoll(QObject *parent) :
-    QObject(parent)
+
+UinputEvPoll::UinputEvPoll(QObject *parent) : QObject(parent)
 {
     _polling = false;
     _abort = false;
@@ -18,9 +26,7 @@ void UinputEvPoll::abort()
 {
     mutex.lock();
     if (_polling)
-    {
         _abort = true;
-    }
     mutex.unlock();
 }
 
@@ -47,7 +53,7 @@ void UinputEvPoll::doPoll()
 
     if (epfd < 0)
     {
-        printf("triambience: failed to create epoll instance\n");
+        printf("triambience: Failed to create epoll instance\n");
 
         emit finished();
         return;
@@ -76,25 +82,18 @@ void UinputEvPoll::doPoll()
         bool abort = _abort;
         mutex.unlock();
 
-        if (abort)
-        {
-            break;
-        }
+        if (abort) break;
 
         ret = epoll_wait(epfd, evs, 16, -1);
 
         if (ret < 0)
         {
-            if (errno == EINTR)
-                continue;
-            else
-                break;
+            if (errno == EINTR) continue;
+            else break;
         }
 
         for (i = 0 ; i<ret ; i++)
-        {
             readKeyboard(evs[i].data.fd);
-        }
     }
 
     close(epfd);

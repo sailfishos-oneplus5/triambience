@@ -8,14 +8,9 @@ QT -= gui
 
 DEFINES += "APPVERSION=\\\"$${SPECVERSION}\\\""
 
-target.path = /usr/bin/
-
-systemduser.files = config/triambience.service
-systemduser.path = /etc/systemd/user/
-
-INSTALLS += target systemduser
-
-message($${DEFINES})
+HEADERS += \
+    src/switcher.h \
+    src/uinputevpoll.h
 
 SOURCES += \
     src/triambience.cpp \
@@ -24,8 +19,11 @@ SOURCES += \
 
 OTHER_FILES += \
     rpm/$${TARGET}.spec \
-    config/triambience.service
+    config/$${TARGET}.service
 
-HEADERS += \
-    src/switcher.h \
-    src/uinputevpoll.h
+target.path = /usr/bin/
+
+systemduser.files = config/$${TARGET}.service
+systemduser.path = /etc/systemd/user/
+
+INSTALLS += target systemduser

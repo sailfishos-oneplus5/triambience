@@ -1,15 +1,20 @@
-#include "switcher.h"
+/*
+ * (C) 2016 Kimmo Lindholm <kimmo.lindholm@gmail.com> Kimmoli
+ * (C) 2019 Jami Kettunen <jami.kettunen@protonmail.com>
+ *
+ * Triambience daemon
+ *
+ */
+
 #include <stdio.h>
+#include "switcher.h"
 
 
-switcher::switcher(QObject *parent) :
-    QObject(parent)
+switcher::switcher(QObject *parent) : QObject(parent)
 {
     if (!QDBusConnection::sessionBus().isConnected())
-    {
         printf("triambience: Cannot connect to the D-Bus sessionBus\n%s\n", qPrintable(QDBusConnection::sessionBus().lastError().message()));
-    }    
-    
+
     currentKeypos = QString();
 
     ambience_top = new MGConfItem("/apps/onyxtristate/top");
@@ -37,11 +42,9 @@ void switcher::handleAmbienceSettingsChanged()
     ambiences.insert("bottom", ambience_bottom->value(QString("origami")).toString());
 }
 
-
 void switcher::switchTo(QString keypos)
 {
-    if (keypos == currentKeypos)
-        return;
+    if (keypos == currentKeypos) return;
 
     printf("triambience: Key in %s position, changing to %s\n", qPrintable(keypos), qPrintable(ambiences.value(keypos)));
     currentKeypos = keypos;
