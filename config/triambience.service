@@ -1,6 +1,7 @@
 [Unit]
-Description=Tristate ambience switcher
-After=user-session.target
+Description=Tristate ambience switcher daemon
+Requires=lipstick.service
+After=user-session.target lipstick.service
 
 [Service]
 ExecStart=/usr/bin/triambience
