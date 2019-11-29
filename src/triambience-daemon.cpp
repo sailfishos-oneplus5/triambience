@@ -27,7 +27,7 @@ int main(int argc, char **argv)
     setlinebuf(stdout);
     setlinebuf(stderr);
 
-    printf("triambience: Starting daemon version %s\n", APPVERSION);
+    printf("triambienced: Starting daemon version %s\n", APPVERSION);
 
     switcher *sw;
     UinputEvPoll *uin;
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
     int fd = uin->openDevice("/dev/input/event3");
     if (fd == -1)
     {
-        printf("triambience: error opening input device\n");
+        printf("triambienced: error opening input device\n");
         return EXIT_FAILURE;
     }
 

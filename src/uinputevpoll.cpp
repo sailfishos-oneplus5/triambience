@@ -53,7 +53,7 @@ void UinputEvPoll::doPoll()
 
     if (epfd < 0)
     {
-        printf("triambience: Failed to create epoll instance\n");
+        printf("triambienced: Failed to create epoll instance\n");
 
         emit finished();
         return;
@@ -66,14 +66,14 @@ void UinputEvPoll::doPoll()
     ret = epoll_ctl(epfd, EPOLL_CTL_ADD, _uinputfd, &ev);
     if (ret)
     {
-        printf("triambience: Couldn't add to epoll\n");
+        printf("triambienced: Couldn't add to epoll\n");
         close(epfd);
 
         emit finished();
         return;
     }
 
-    printf("triambience: Starting tristate key polling.\n");
+    printf("triambienced: Starting tristate key polling.\n");
 
     for (;;)
     {
@@ -126,7 +126,7 @@ void UinputEvPoll::readKeyboard(int fd)
 
     if (len < 0 && errno != EWOULDBLOCK)
     {
-        printf("triambience: Couldn't read, %s\n", strerror(errno));
+        printf("triambienced: Couldn't read, %s\n", strerror(errno));
         return;
     }
 }

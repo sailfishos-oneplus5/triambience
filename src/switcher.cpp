@@ -13,7 +13,7 @@
 switcher::switcher(QObject *parent) : QObject(parent)
 {
     if (!QDBusConnection::sessionBus().isConnected())
-        printf("triambience: Cannot connect to the D-Bus sessionBus\n%s\n", qPrintable(QDBusConnection::sessionBus().lastError().message()));
+        printf("triambienced: Cannot connect to the D-Bus sessionBus\n%s\n", qPrintable(QDBusConnection::sessionBus().lastError().message()));
 
     currentKeypos = QString();
 
@@ -35,7 +35,7 @@ switcher::switcher(QObject *parent) : QObject(parent)
 
 void switcher::handleAmbienceSettingsChanged()
 {
-    printf("triambience: ambience configuration changed\n");
+    printf("triambienced: ambience configuration changed\n");
 
     ambiences.insert("top", ambience_top->value(QString("silent")).toString());
     ambiences.insert("middle", ambience_middle->value(QString("sailing")).toString());
@@ -46,7 +46,7 @@ void switcher::switchTo(QString keypos)
 {
     if (keypos == currentKeypos) return;
 
-    printf("triambience: Key in %s position, changing to %s\n", qPrintable(keypos), qPrintable(ambiences.value(keypos)));
+    printf("triambienced: Key in %s position, changing to %s\n", qPrintable(keypos), qPrintable(ambiences.value(keypos)));
     currentKeypos = keypos;
 
     filter->start();

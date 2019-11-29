@@ -1,4 +1,4 @@
-TARGET = triambience
+TARGET = triambienced
 
 CONFIG += link_pkgconfig
 PKGCONFIG += mlite5
@@ -13,7 +13,7 @@ HEADERS += \
     src/uinputevpoll.h
 
 SOURCES += \
-    src/triambience.cpp \
+    src/triambience-daemon.cpp \
     src/switcher.cpp \
     src/uinputevpoll.cpp
 
