@@ -14,7 +14,7 @@ Name:       triambienced
 
 Summary:    Tristate ambience switcher daemon
 Version:    1.0.0
-Release:    1
+Release:    2
 Group:      System/Daemons
 License:    LICENSE
 URL:        https://github.com/sailfishos-oneplus5/triambience-daemon
