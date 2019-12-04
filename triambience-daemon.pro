@@ -24,6 +24,6 @@ OTHER_FILES += \
 target.path = /usr/bin/
 
 systemduser.files = config/$${TARGET}.service
-systemduser.path = /lib/systemd/user/
+systemduser.path = /usr/lib/systemd/user/
 
 INSTALLS += target systemduser
