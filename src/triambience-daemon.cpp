@@ -32,15 +32,18 @@ int main(int argc, char **argv)
     switcher *sw;
     UinputEvPoll *uin;
     QThread *uinThread;
+    MGConfItem *dconfSliderDevice;
 
     uin = new UinputEvPoll();
     sw = new switcher();
     uinThread = new QThread();
+    dconfSliderDevice = new MGConfItem("/apps/onyxtristate/sliderDevice");
 
-    int fd = uin->openDevice("/dev/input/event3");
+    const char* sliderDevice = dconfSliderDevice->value(QString("/dev/input/event3")).toString().toUtf8().constData();
+    int fd = uin->openDevice(sliderDevice);
     if (fd == -1)
     {
-        printf("triambienced: error opening input device\n");
+        printf("triambienced: error opening input device %s!\n", sliderDevice);
         return EXIT_FAILURE;
     }
 
