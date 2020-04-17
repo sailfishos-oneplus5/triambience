@@ -1,6 +1,6 @@
 /*
  * (C) 2016 Kimmo Lindholm <kimmo.lindholm@gmail.com> Kimmoli
- * (C) 2019 Jami Kettunen <jami.kettunen@protonmail.com>
+ * (C) 2019-2020 Jami Kettunen <jami.kettunen@protonmail.com>
  *
  * Triambience daemon
  *
