@@ -13,7 +13,7 @@ Name:       triambienced
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    Tristate ambience switcher daemon
-Version:    1.1.0
+Version:    1.2.0
 Release:    1
 Group:      System/Daemons
 License:    LICENSE
