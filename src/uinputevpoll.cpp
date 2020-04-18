@@ -20,6 +20,13 @@ UinputEvPoll::UinputEvPoll(QObject *parent) : QObject(parent)
     _polling = false;
     _abort = false;
     _uinputfd = -1;
+
+    dconfSliderCodes = new MGConfItem("/apps/onyxtristate/sliderCodes");
+    QVariantList sliderCodes = dconfSliderCodes->value(defSliderCodes).toList();
+
+    _sliderCodes[0] = sliderCodes[0].toInt(); // e.g. 0x259
+    _sliderCodes[1] = sliderCodes[1].toInt(); // e.g. 0x25a
+    _sliderCodes[2] = sliderCodes[2].toInt(); // e.g. 0x25b
 }
 
 void UinputEvPoll::abort()
@@ -114,11 +121,11 @@ void UinputEvPoll::readKeyboard(int fd)
         {
             if (evs[i].type == EV_KEY && evs[i].value == 1)
             {
-                if (evs[i].code == 0x259)
+                if (evs[i].code == _sliderCodes[0])
                     emit tristateChanged("top");
-                else if (evs[i].code == 0x25a)
+                else if (evs[i].code == _sliderCodes[1])
                     emit tristateChanged("middle");
-                else if (evs[i].code == 0x25b)
+                else if (evs[i].code == _sliderCodes[2])
                     emit tristateChanged("bottom");
             }
         }

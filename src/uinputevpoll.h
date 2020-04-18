@@ -9,8 +9,9 @@
 #ifndef UINPUTEVPOLL_H
 #define UINPUTEVPOLL_H
 
-#include <QObject>
 #include <QMutex>
+#include <QObject>
+#include <mlite5/MGConfItem>
 
 
 class UinputEvPoll : public QObject
@@ -36,10 +37,13 @@ private:
     void readKeyboard(int fd);
 
     QMutex mutex;
+    MGConfItem *dconfSliderCodes;
+    QVariantList defSliderCodes = { 0x259, 0x25a, 0x25b };
 
     bool _polling;
     bool _abort;
     int _uinputfd;
+    int _sliderCodes[3];
 };
 
 #endif // UINPUTEVPOLL_H
